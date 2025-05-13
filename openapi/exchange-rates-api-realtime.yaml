@@ -1,0 +1,1086 @@
+openapi: 3.0.1
+info:
+  title: REST API
+  contact:
+    name: COINAPI LTD
+    url: https://www.coinapi.io
+    email: support@coinapi.io
+  license:
+    name: MIT License
+    url: https://github.com/coinapi/coinapi-sdk/blob/master/LICENSE
+  version: v1
+servers:
+  - url: https://api-realtime.exrates.coinapi.io
+paths:
+  /v1/assets:
+    get:
+      tags:
+        - Metadata
+      summary: List all assets
+      description: "Retrieves all assets.\r\n            \r\n:::info\r\nOur asset identifiers are aligned with the ISO 4217 currency codes standard only for fiat money (government or law regulated currency).\r\n:::\r\n            \r\n:::info\r\nProperties of the output are providing aggregated information from across all symbols related to the specific asset. If you need to calculate your aggregation (e.g., limiting only the particular type of symbols), you should use /v1/symbols endpoint as a data source.\r\n:::"
+      parameters:
+        - name: filter_asset_id
+          in: query
+          description: 'Comma or semicolon delimited asset identifiers used to filter response. (optional, eg. `BTC;ETH`).'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            application/x-msgpack:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+  '/v1/assets/{asset_id}':
+    get:
+      tags:
+        - Metadata
+      summary: List all assets by asset ID
+      parameters:
+        - name: asset_id
+          in: path
+          description: The asset ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+            application/x-msgpack:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Asset'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "name": "Bitcoin",
+    "type_is_crypto": 1,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:55:07.6724523Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:17.8592413Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:11.8220000Z",
+    "data_symbols_count": 22711,
+    "volume_1hrs_usd": 102894431436.49,
+    "volume_1day_usd": 2086392323256.16,
+    "volume_1mth_usd": 57929168359984.54,
+    "price_usd": 9166.207274778093436220194944,
+    "chain_addresses": [
+      {
+        "chain_id": "ARBITRUM",
+        "network_id": "MAINNET",
+        "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+      },
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  },
+  {
+    "asset_id": "USD",
+    "name": "US Dollar",
+    "type_is_crypto": 0,
+    "data_quote_start": "2014-02-24T17:43:05.0000000Z",
+    "data_quote_end": "2019-11-03T17:54:49.3807706Z",
+    "data_orderbook_start": "2014-02-24T17:43:05.0000000Z",
+    "data_orderbook_end": "2019-11-03T17:55:13.1863931Z",
+    "data_trade_start": "2010-07-17T23:09:17.0000000Z",
+    "data_trade_end": "2019-11-03T17:55:07.7870000Z",
+    "data_symbols_count": 10728,
+    "volume_1hrs_usd": 9466454016.52,
+    "volume_1day_usd": 221580758173.49,
+    "volume_1mth_usd": 11816685174661.70,
+    "price_usd": 1.0,
+    "chain_addresses": [
+      {
+        "chain_id": "ETHEREUM",
+        "network_id": "MAINNET",
+        "address": "0xd233d1f6fd11640081abb8db125f722b5dc729dc"
+      }
+    ],
+    "data_start": "2010-07-17",
+    "data_end": "2019-11-03"
+  }
+]
+  '/v1/assets/icons/{size}':
+    get:
+      tags:
+        - Metadata
+      summary: List all asset icons
+      description: Gets the list of icons (of the given size) for all the assets.
+      parameters:
+        - name: size
+          in: path
+          description: The size of the icons.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Icon'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/f231d7382689406f9a50dde841418c64.png"
+  },
+  {
+    "asset_id": "ETH",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/04836ff3bc4d4d95820e0155594dca86.png"
+  },
+  {
+    "asset_id": "USD",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/4873707f25fe4de3b4bca6fa5c631011.png"
+  }
+]
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Icon'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/f231d7382689406f9a50dde841418c64.png"
+  },
+  {
+    "asset_id": "ETH",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/04836ff3bc4d4d95820e0155594dca86.png"
+  },
+  {
+    "asset_id": "USD",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/4873707f25fe4de3b4bca6fa5c631011.png"
+  }
+]
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Icon'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/f231d7382689406f9a50dde841418c64.png"
+  },
+  {
+    "asset_id": "ETH",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/04836ff3bc4d4d95820e0155594dca86.png"
+  },
+  {
+    "asset_id": "USD",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/4873707f25fe4de3b4bca6fa5c631011.png"
+  }
+]
+            application/x-msgpack:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/v1.Icon'
+              examples:
+                Example response:
+                  value: [
+  {
+    "asset_id": "BTC",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/f231d7382689406f9a50dde841418c64.png"
+  },
+  {
+    "asset_id": "ETH",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/04836ff3bc4d4d95820e0155594dca86.png"
+  },
+  {
+    "asset_id": "USD",
+    "url": "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/4873707f25fe4de3b4bca6fa5c631011.png"
+  }
+]
+  '/v1/exchangerate/{asset_id_base}/{asset_id_quote}':
+    get:
+      tags:
+        - Exchange Rates
+      summary: Get specific rate
+      description: "Retrieves the exchange rate for a specific base and quote asset at a given time or the current rate.\r\n            \r\n:::info\r\nIf you are using an exchange rate for mission-critical operations, then for best reliability, you should measure the difference between current time and the time returned from the response to ensure that value of the difference between those meets your internal requirements.\r\n:::"
+      operationId: Get specific rate
+      parameters:
+        - name: asset_id_base
+          in: path
+          description: Requested exchange rate base asset identifier (from the Metadata -> Assets)
+          required: true
+          schema:
+            type: string
+        - name: asset_id_quote
+          in: path
+          description: Requested exchange rate quote asset identifier (from the Metadata -> Assets)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRate'
+              examples:
+                Example response:
+                  value: {
+  "time": "2025-05-13T06:08:27.1847347Z",
+  "asset_id_base": "BTC",
+  "asset_id_quote": "USD",
+  "rate": 10000.0
+}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRate'
+              examples:
+                Example response:
+                  value: {
+  "time": "2025-05-13T06:08:27.1847347Z",
+  "asset_id_base": "BTC",
+  "asset_id_quote": "USD",
+  "rate": 10000.0
+}
+            text/json:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRate'
+              examples:
+                Example response:
+                  value: {
+  "time": "2025-05-13T06:08:27.1847347Z",
+  "asset_id_base": "BTC",
+  "asset_id_quote": "USD",
+  "rate": 10000.0
+}
+            application/x-msgpack:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRate'
+              examples:
+                Example response:
+                  value: {
+  "time": "2025-05-13T06:08:27.1847347Z",
+  "asset_id_base": "BTC",
+  "asset_id_quote": "USD",
+  "rate": 10000.0
+}
+  '/v1/exchangerate/{asset_id_base}':
+    get:
+      tags:
+        - Exchange Rates
+      summary: Get all current rates
+      description: "Get the current exchange rate between requested asset and all other assets.\r\n            \r\n:::info\r\nIf you are using an exchange rate for mission-critical operations, then for best reliability, you should measure the difference between current time and the time returned from the response to ensure that value of the difference between those meets your internal requirements.\r\n:::\r\n            \r\n:::info\r\nYou can invert the rates by using Y = 1 / X equation, for example BTC/USD = 1 / (USD/BTC);\r\n:::"
+      parameters:
+        - name: asset_id_base
+          in: path
+          description: Requested exchange rates base asset identifier (from the Metadata -> Assets)
+          required: true
+          schema:
+            type: string
+        - name: filter_asset_id
+          in: query
+          description: Comma or semicolon delimited asset identifiers used to filter response (optional)
+          schema:
+            type: string
+        - name: invert
+          in: query
+          description: 'True will invert all the rates (optional, if true then rates will be calculated as `rate = 1 / actual_rate` eg. `USD/BTC` as `BTC/USD`)'
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRates`1'
+              examples:
+                Example response:
+                  value: {
+  "asset_id_base": "BTC",
+  "rates": [
+    {
+      "time": "2017-08-09T14:31:37.0520000Z",
+      "asset_id_quote": "USD",
+      "rate": 3258.8875417798037784035133948
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "EUR",
+      "rate": 2782.5255080599273092901331567
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "CNY",
+      "rate": 21756.295595926054627342411501
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "GBP",
+      "rate": 2509.6024203799580199765804823
+    }
+  ]
+}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRates`1'
+              examples:
+                Example response:
+                  value: {
+  "asset_id_base": "BTC",
+  "rates": [
+    {
+      "time": "2017-08-09T14:31:37.0520000Z",
+      "asset_id_quote": "USD",
+      "rate": 3258.8875417798037784035133948
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "EUR",
+      "rate": 2782.5255080599273092901331567
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "CNY",
+      "rate": 21756.295595926054627342411501
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "GBP",
+      "rate": 2509.6024203799580199765804823
+    }
+  ]
+}
+            text/json:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRates`1'
+              examples:
+                Example response:
+                  value: {
+  "asset_id_base": "BTC",
+  "rates": [
+    {
+      "time": "2017-08-09T14:31:37.0520000Z",
+      "asset_id_quote": "USD",
+      "rate": 3258.8875417798037784035133948
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "EUR",
+      "rate": 2782.5255080599273092901331567
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "CNY",
+      "rate": 21756.295595926054627342411501
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "GBP",
+      "rate": 2509.6024203799580199765804823
+    }
+  ]
+}
+            application/x-msgpack:
+              schema:
+                $ref: '#/components/schemas/v1.ExchangeRates`1'
+              examples:
+                Example response:
+                  value: {
+  "asset_id_base": "BTC",
+  "rates": [
+    {
+      "time": "2017-08-09T14:31:37.0520000Z",
+      "asset_id_quote": "USD",
+      "rate": 3258.8875417798037784035133948
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "EUR",
+      "rate": 2782.5255080599273092901331567
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "CNY",
+      "rate": 21756.295595926054627342411501
+    },
+    {
+      "time": "2017-08-09T14:31:36.7570000Z",
+      "asset_id_quote": "GBP",
+      "rate": 2509.6024203799580199765804823
+    }
+  ]
+}
+components:
+  schemas:
+    v1.Asset:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          description: Gets or sets the asset ID.
+          nullable: true
+        name:
+          type: string
+          description: Gets or sets the name of the asset.
+          nullable: true
+        type_is_crypto:
+          type: integer
+          description: Gets or sets a value indicating whether the asset is a cryptocurrency.
+          format: int32
+        data_quote_start:
+          type: string
+          description: Gets or sets the start date of quote data.
+          format: date-time
+          nullable: true
+        data_quote_end:
+          type: string
+          description: Gets or sets the end date of quote data.
+          format: date-time
+          nullable: true
+        data_orderbook_start:
+          type: string
+          description: Gets or sets the start date of order book data.
+          format: date-time
+          nullable: true
+        data_orderbook_end:
+          type: string
+          description: Gets or sets the end date of order book data.
+          format: date-time
+          nullable: true
+        data_trade_start:
+          type: string
+          description: Gets or sets the start date of trade data.
+          format: date-time
+          nullable: true
+        data_trade_end:
+          type: string
+          description: Gets or sets the end date of trade data.
+          format: date-time
+          nullable: true
+        data_symbols_count:
+          type: integer
+          description: Gets or sets the number of symbols.
+          format: int64
+          nullable: true
+        volume_1hrs_usd:
+          type: number
+          description: Gets or sets the USD volume in the last 1 hour.
+          format: double
+          nullable: true
+        volume_1day_usd:
+          type: number
+          description: Gets or sets the USD volume in the last 1 day.
+          format: double
+          nullable: true
+        volume_1mth_usd:
+          type: number
+          description: Gets or sets the USD volume in the last 1 month.
+          format: double
+          nullable: true
+        price_usd:
+          type: number
+          description: Gets or sets the USD price of the asset.
+          format: double
+          nullable: true
+        id_icon:
+          type: string
+          description: Gets or sets the ID of the icon for the asset.
+          format: uuid
+          nullable: true
+        supply_current:
+          type: number
+          description: Gets or sets the current supply of the asset.
+          format: double
+          nullable: true
+        supply_total:
+          type: number
+          description: Gets or sets the total supply of the asset.
+          format: double
+          nullable: true
+        supply_max:
+          type: number
+          description: Gets or sets the maximum supply of the asset.
+          format: double
+          nullable: true
+        chain_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.ChainNetworkAddress'
+          description: ''
+          nullable: true
+        data_start:
+          type: string
+          nullable: true
+          readOnly: true
+        data_end:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+      description: Represents an asset.
+    v1.ChainNetworkAddress:
+      type: object
+      properties:
+        chain_id:
+          type: string
+          description: Gets or sets chain id
+          nullable: true
+        network_id:
+          type: string
+          description: Gets or sets network id
+          nullable: true
+        address:
+          type: string
+          description: Gets or sets chain address
+          nullable: true
+      additionalProperties: false
+      description: Contains information about assets' chain network addresses
+    v1.ExchangeRate:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Gets or sets the time of the exchange rate.
+          format: date-time
+        asset_id_base:
+          type: string
+          description: Gets or sets the base asset ID of the exchange rate.
+          nullable: true
+        asset_id_quote:
+          type: string
+          description: Gets or sets the quote asset ID of the exchange rate.
+          nullable: true
+        rate:
+          type: number
+          description: Gets or sets the exchange rate value.
+          format: double
+      additionalProperties: false
+      description: Represents an exchange rate.
+    v1.ExchangeRatesRate:
+      type: object
+      properties:
+        time:
+          type: string
+          description: Gets or sets the time of the exchange rate.
+          format: date-time
+        asset_id_quote:
+          type: string
+          description: Gets or sets the quote asset ID of the exchange rate.
+          nullable: true
+        rate:
+          type: number
+          description: Gets or sets the exchange rate value.
+          format: double
+      additionalProperties: false
+      description: Represents an exchange rate within a collection of exchange rates.
+    v1.ExchangeRates`1:
+      type: object
+      properties:
+        asset_id_base:
+          type: string
+          description: Gets or sets the base asset ID.
+          nullable: true
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.ExchangeRatesRate'
+          description: Gets or sets the list of exchange rates.
+          nullable: true
+      additionalProperties: false
+      description: Represents exchange rates for a specific base asset.
+    v1.Icon:
+      type: object
+      properties:
+        exchange_id:
+          type: string
+          description: Gets or sets the exchange ID associated with the icon.
+          nullable: true
+        asset_id:
+          type: string
+          description: Gets or sets the asset ID associated with the icon.
+          nullable: true
+        url:
+          type: string
+          description: Gets or sets the URL of the icon.
+          nullable: true
+      additionalProperties: false
+      description: Represents an icon.
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      description: CoinAPI API key needed to access the endpoints
+      name: X-CoinAPI-Key
+      in: header
+security:
+  - APIKey: [ ]
+tags:
+  - name: Exchange Rates
+    description: "\n<span data-status-page=\"28924\"></span>\nExchange rate is defined as (VWAP-24H) last 24 hour (rolling window over time) Volume Weighted Average Price across multiple data sources listed on our platform. We are selecting and managing the data sources that are used in the calculation based on multiple factors to provide data of highest quality. \n\nAlgorithm is described below:\n\n  1. Exchange rates are produced from quotes, trades, and metadata datasets.\n  1. Symbols that are not data_type = \"SPOT\" are excluded from the calculation.\n  1. Symbols from the data sources that were marked by us as not legitimate are excluded from the calculation.\n  1. Quotes data where the spread is outside the range of ```<0$; 67%>``` are discarded. `spreadPrc = (ask - bid) / ((ask + bid) / 2)`\n  1. The midpoint from the quote data is used as a pricing reference and it's weighted by the passive cumulative volume resting on the best prices.\n  1. Volume from the trades is used to weight the midpoint prices in the VWAP24 algorithm.\n  1. Midpoint data that has not been updated in the last 5 minutes and 1 second is discarded.\n  1. The last 24-hour volume for each symbol is updated every 4 hours when approximately 20% of the data in the sliding window changes (also, the list of eligible markets is updated at the same time).\n  1. Everywhere in the algorithm below, we are using asset pairs only from exchanges that have the highest legitimacy rank, and the rest of the exchanges are discarded. As we establish the highest-ranking exchanges that have this data for each asset pair, we ensure that the highest quality data is used for each of them. The rank used for asset pairing is carried over to the following steps.\n  1. Every 1 second, we update VWAP24 data for every asset pair across all data sources.\n  1. For each asset pair, we also discard data that is outside the 3 sigma range if there are at least 3 exchanges for this asset pair.\n  1. From the VWAP24 data, we are creating a tree structure where node/vertex = asset and edge = rate.\n  1. By traversing the tree structure using the BFS algorithm and our secret sauce, we are able to establish the final exchange rates.\n    "
+  - name: Metadata
+    description: <span data-status-page="28923"></span>
+  - name: Assets
+    description: Controller for accessing asset information.
